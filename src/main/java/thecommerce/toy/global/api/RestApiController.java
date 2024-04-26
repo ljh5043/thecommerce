@@ -32,7 +32,7 @@ public class RestApiController {
         return convertToResponseEntity(HttpStatus.OK, restApiResponse);
     }
     //    생성 성공 응답
-    public ResponseEntity<String> createSuccessRestResponse(Object data) {
+    public ResponseEntity<String> createRestResponseWithCreated(Object data) {
         RestApiResponse restApiResponse = RestApiResponse.createResponse(true, data);
         return convertToResponseEntity(HttpStatus.CREATED, restApiResponse);
     }
