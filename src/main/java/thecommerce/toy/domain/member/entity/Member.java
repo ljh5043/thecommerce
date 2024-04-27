@@ -3,6 +3,7 @@ package thecommerce.toy.domain.member.entity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import thecommerce.toy.domain.member.payload.request.ModifyMemberInfoRequest;
 import thecommerce.toy.domain.member.payload.request.SaveNewMemberRequest;
 
 import javax.persistence.*;
@@ -44,5 +45,10 @@ public class Member extends BaseTimeEntity {
 
     public void completeSave(){
         this.active = true;
+    }
+
+    public void update(ModifyMemberInfoRequest request) {
+        this.phone = request.getPhone();
+        this.email = request.getEmail();
     }
 }

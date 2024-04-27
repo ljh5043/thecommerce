@@ -2,12 +2,14 @@ package thecommerce.toy.domain.member.payload.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import thecommerce.toy.domain.member.enums.SortTypeForFindAll;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 @Data
+@NoArgsConstructor
 public class FindAllByPagingRequest {
 
     @Positive(message = "page는 1보다 커야합니다.")

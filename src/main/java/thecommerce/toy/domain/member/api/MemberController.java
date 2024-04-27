@@ -1,7 +1,6 @@
 package thecommerce.toy.domain.member.api;
 
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,7 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import thecommerce.toy.domain.member.payload.request.FindAllByPagingRequest;
+import thecommerce.toy.domain.member.payload.request.ModifyMemberInfoRequest;
 import thecommerce.toy.domain.member.payload.request.SaveNewMemberRequest;
+import thecommerce.toy.domain.member.payload.response.ModifyMemberInfoResponse;
 import thecommerce.toy.domain.member.service.MemberService;
 import thecommerce.toy.global.api.RestApiController;
 
@@ -47,6 +48,17 @@ public class MemberController extends RestApiController {
             return createFailRestResponse(bindingResult);
         }
         return createRestResponse(memberService.findAllByPaging(request));
-
     }
+
+    @Operation(summary = "회원 정보 수정")
+    @PostMapping(value = "/{loginId}")
+    public ResponseEntity<String> update(@PathVariable String loginId,
+                                         @RequestBody @Valid ModifyMemberInfoRequest request,
+                                         BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return createFailRestResponse(bindingResult);
+        }
+        return createRestResponse(memberService.update(loginId, request));
+    }
+
 }

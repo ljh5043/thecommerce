@@ -10,9 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import thecommerce.toy.domain.member.entity.Member;
 import thecommerce.toy.domain.member.payload.request.FindAllByPagingRequest;
 import thecommerce.toy.domain.member.payload.request.FindByLoginIdRequest;
+import thecommerce.toy.domain.member.payload.request.ModifyMemberInfoRequest;
 import thecommerce.toy.domain.member.payload.request.SaveNewMemberRequest;
 import thecommerce.toy.domain.member.payload.response.FindAllByPagingResponse;
 import thecommerce.toy.domain.member.payload.response.MemberResponse;
+import thecommerce.toy.domain.member.payload.response.ModifyMemberInfoResponse;
 import thecommerce.toy.domain.member.payload.response.SaveNewMemberResponse;
 import thecommerce.toy.domain.member.repository.MemberRepository;
 import thecommerce.toy.domain.member.validator.MemberValidator;
@@ -60,8 +62,16 @@ public class MemberService {
         return new FindAllByPagingResponse(responses.toList(), pageUtil.getPageInfo(responses, request.getPage()));
     }
 
-    //  update
 
+    //  update
+    @Transactional
+    public ModifyMemberInfoResponse update(String loginId, ModifyMemberInfoRequest request) {
+        Member member = memberRepository.findByLoginId(loginId).orElseThrow(() -> new GlobalException(ErrorCode.NOT_EXIST_MEMBER));
+        ModifyMemberInfoResponse.BeforeInfo beforeInfo = new ModifyMemberInfoResponse.BeforeInfo(member.getPhone(), member.getEmail());
+        member.update(request);
+        ModifyMemberInfoResponse.AfterInfo afterInfo = new ModifyMemberInfoResponse.AfterInfo(member.getPhone(), member.getEmail());
+        return new ModifyMemberInfoResponse(beforeInfo, afterInfo);
+    }
 
     //  delete
 

@@ -1,6 +1,7 @@
 package thecommerce.toy.domain.member.repository.custom.impl;
 
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.MathExpressions;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.support.PageableExecutionUtils;
+import thecommerce.toy.domain.member.entity.Member;
 import thecommerce.toy.domain.member.entity.QMember;
 import thecommerce.toy.domain.member.enums.SortTypeForFindAll;
 import thecommerce.toy.domain.member.payload.request.FindAllByPagingRequest;
@@ -55,5 +57,13 @@ public class MemberRepositoryCustomImpl implements MemberRepositoryCustom {
         //  jpaQuery.fetch().size()를 직접 호출하는 것은 메소드 실행 시점에서 즉시 쿼리를 실행하여 결과를 반환
         //  이는 메소드를 호출할 때마다 쿼리가 실행되어 자원을 소모
         return PageableExecutionUtils.getPage(content, pageable, () -> jpaQuery.fetch().size());
+    }
+
+    @Override
+    public Member findRandomMemberWithExistingData() {
+        return jpaQueryFactory.selectFrom(member)
+                .where(member.id.isNotNull())
+                .orderBy(MathExpressions.random().asc())
+                .fetchFirst();
     }
 }

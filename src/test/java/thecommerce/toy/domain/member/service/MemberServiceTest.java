@@ -8,9 +8,11 @@ import thecommerce.toy.domain.member.entity.Member;
 import thecommerce.toy.domain.member.enums.SortTypeForFindAll;
 import thecommerce.toy.domain.member.payload.request.FindAllByPagingRequest;
 import thecommerce.toy.domain.member.payload.request.FindByLoginIdRequest;
+import thecommerce.toy.domain.member.payload.request.ModifyMemberInfoRequest;
 import thecommerce.toy.domain.member.payload.request.SaveNewMemberRequest;
 import thecommerce.toy.domain.member.payload.response.FindAllByPagingResponse;
 import thecommerce.toy.domain.member.payload.response.MemberResponse;
+import thecommerce.toy.domain.member.payload.response.ModifyMemberInfoResponse;
 import thecommerce.toy.domain.member.payload.response.SaveNewMemberResponse;
 import thecommerce.toy.domain.member.repository.MemberRepository;
 import thecommerce.toy.global.error.enums.ErrorCode;
@@ -102,5 +104,34 @@ class MemberServiceTest {
             }
         }
 
+    }
+
+    @Test
+    void update() {
+        saveNewMember();
+        //  given
+        Member member = memberRepository.findRandomMemberWithExistingData();
+        ModifyMemberInfoRequest request = new ModifyMemberInfoRequest("01000000000", "update@naver.com");
+
+        //  when
+        ModifyMemberInfoResponse response = memberService.update(member.getLoginId(), request);
+
+        //  then
+        assertNotNull(response);
+    }
+
+    @Test
+    void updateNotExist() {
+        saveNewMember();
+        //  given
+        ModifyMemberInfoRequest request = new ModifyMemberInfoRequest("01000000000", "update@naver.com");
+
+        //  when
+        GlobalException exception = assertThrows(
+                GlobalException.class,
+                () -> memberService.update("NON_EXISTS", request)
+        );
+        //  then
+        assertEquals(ErrorCode.NOT_EXIST_MEMBER, exception.getErrorCode());
     }
 }

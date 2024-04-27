@@ -8,8 +8,8 @@ import thecommerce.toy.global.util.paging.PageInfo;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class FindAllByPagingResponse {
     private List<MemberResponse> memberList;
     private PageInfo pageInfo;
