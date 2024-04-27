@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import thecommerce.toy.domain.member.payload.request.FindAllByPagingRequest;
 import thecommerce.toy.domain.member.payload.request.ModifyMemberInfoRequest;
 import thecommerce.toy.domain.member.payload.request.SaveNewMemberRequest;
-import thecommerce.toy.domain.member.payload.response.ModifyMemberInfoResponse;
 import thecommerce.toy.domain.member.service.MemberService;
 import thecommerce.toy.global.api.RestApiController;
 

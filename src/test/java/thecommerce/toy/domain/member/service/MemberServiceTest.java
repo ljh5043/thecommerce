@@ -11,7 +11,6 @@ import thecommerce.toy.domain.member.payload.request.FindByLoginIdRequest;
 import thecommerce.toy.domain.member.payload.request.ModifyMemberInfoRequest;
 import thecommerce.toy.domain.member.payload.request.SaveNewMemberRequest;
 import thecommerce.toy.domain.member.payload.response.FindAllByPagingResponse;
-import thecommerce.toy.domain.member.payload.response.MemberResponse;
 import thecommerce.toy.domain.member.payload.response.ModifyMemberInfoResponse;
 import thecommerce.toy.domain.member.payload.response.SaveNewMemberResponse;
 import thecommerce.toy.domain.member.repository.MemberRepository;
