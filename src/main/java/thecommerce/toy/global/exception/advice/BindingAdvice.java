@@ -32,7 +32,6 @@ public class BindingAdvice extends RestApiControllerAdvice{
     @Around("execution(* thecommerce.toy..*Controller.*(..))")
     public Object validationHandler(ProceedingJoinPoint joinPoint) throws Throwable {
         String type = bindingPathCreate(joinPoint.getSignature());
-        String method = "Not Found";
         String errorCode = ErrorCode.REQUEST_BINDING_RESULT.getCode();
         String errorMessage = ErrorCode.REQUEST_BINDING_RESULT.getErrorMessage();
         Map<String, String> errorMap = new HashMap<>();
@@ -43,7 +42,7 @@ public class BindingAdvice extends RestApiControllerAdvice{
                 BindingResult bindingResult = (BindingResult) arg;
                 if (bindingResult.hasErrors()) {
                     populateErrorMap(bindingResult, errorMap);
-                    BindingResultResponse response = new BindingResultResponse(false, type, method, errorCode, errorMessage, errorMap);
+                    BindingResultResponse response = new BindingResultResponse(false, type, errorCode, errorMessage, errorMap);
                     sendLogEvent(response);
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
                 }

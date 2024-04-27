@@ -33,9 +33,6 @@ public class MemberController extends RestApiController {
     @PostMapping(value = "/join")
     public ResponseEntity<String> join(@RequestBody @Valid SaveNewMemberRequest request,
                                        BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return createFailRestResponse(bindingResult);
-        }
         return createRestResponseWithCreated(memberService.saveNewMember(request));
     }
 
@@ -43,9 +40,6 @@ public class MemberController extends RestApiController {
     @GetMapping(value = "/list")
     public ResponseEntity<String> list(@ModelAttribute @Valid FindAllByPagingRequest request,
                                        BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return createFailRestResponse(bindingResult);
-        }
         return createRestResponse(memberService.findAllByPaging(request));
     }
 
@@ -54,9 +48,6 @@ public class MemberController extends RestApiController {
     public ResponseEntity<String> update(@PathVariable String loginId,
                                          @RequestBody @Valid ModifyMemberInfoRequest request,
                                          BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return createFailRestResponse(bindingResult);
-        }
         return createRestResponse(memberService.update(loginId, request));
     }
 

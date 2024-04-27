@@ -9,8 +9,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class ModifyMemberInfoRequest {
 
     @NotBlank(message = "전화번호를 입력해 주세요.")

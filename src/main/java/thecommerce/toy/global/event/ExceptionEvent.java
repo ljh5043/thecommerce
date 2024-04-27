@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 public class ExceptionEvent {
 
     protected String requestPath;
-    protected String requestMethod;
     protected String errorName;
     protected ErrorCode errorCode;
     protected String errorDetailMsg;
@@ -26,7 +25,6 @@ public class ExceptionEvent {
     public static ExceptionEvent createExceptionEvent(GlobalException exception, HttpServletRequest httpServletRequest) {
         ExceptionEvent exceptionEvent = new ExceptionEvent();
         exceptionEvent.setRequestPath(httpServletRequest.getRequestURL().toString());
-        exceptionEvent.setRequestMethod(httpServletRequest.getMethod());
         exceptionEvent.setErrorName(exception.getClass().getSimpleName());
         exceptionEvent.setErrorCode(exception.getErrorCode());
         exceptionEvent.setErrorDetailMsg(exception.getErrorDetailMessage());
@@ -39,7 +37,6 @@ public class ExceptionEvent {
         ExceptionEvent exceptionEvent = new ExceptionEvent();
         GlobalException exception = new GlobalException(ErrorCode.REQUEST_BINDING_RESULT);
         exceptionEvent.setRequestPath(response.getPath());
-        exceptionEvent.setRequestMethod(response.getMethod());
         exceptionEvent.setErrorName(exception.getClass().getSimpleName());
         exceptionEvent.setErrorCode(exception.getErrorCode());
         exceptionEvent.setErrorDetailMsg(response.getContent().toString());
@@ -58,21 +55,16 @@ public class ExceptionEvent {
 
         // 1. Set Request Info
         stringBuilder.append("Request Path : ").append(requestPath).append("\n");
-        stringBuilder.append("Request Method : ").append(requestMethod).append("\n");
 
-        // 2. Set User Info
-
-        // 3. Set Exception
+        // 2. Set Exception
         if (this.errorCode != null) {
             stringBuilder.append("Error Code & Msg : ").append(errorCode.getCode()).append(" / ").append(errorCode.getErrorMessage()).append("\n");
         }
 
-        // 4. Occur Date
+        // 3. Occur Date
         stringBuilder.append("createDate : ").append(createdAt.toString()).append("\n\n");
 
-
-
-        // 5. Set Error Detail Msg
+        // 4. Set Error Detail Msg
         stringBuilder.append(errorDetailMsg);
         stringBuilder.append("\nlogEnd=== === === === === === === === === === === === === === === === === === === === === === === === === === logEnd\n\n");
 
