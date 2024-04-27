@@ -38,7 +38,6 @@ public class MemberService {
     //  신규 회원 생성
     @Transactional
     public SaveNewMemberResponse saveNewMember(SaveNewMemberRequest request) {
-        memberValidator.isLoginIdAndNickNameUnique(request);
         Member member = new Member(request);
         Member savedMember = memberRepository.save(member);
         savedMember.completeSave();

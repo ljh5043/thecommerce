@@ -7,11 +7,13 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import thecommerce.toy.domain.member.payload.request.FindAllByPagingRequest;
 import thecommerce.toy.domain.member.payload.request.ModifyMemberInfoRequest;
 import thecommerce.toy.domain.member.payload.request.SaveNewMemberRequest;
 import thecommerce.toy.domain.member.service.MemberService;
+import thecommerce.toy.domain.member.validator.MemberValidator;
 import thecommerce.toy.global.api.RestApiController;
 
 import javax.validation.Valid;
@@ -23,10 +25,15 @@ import javax.validation.Valid;
 public class MemberController extends RestApiController {
 
     private final MemberService memberService;
+    private final MemberValidator memberValidator;
 
-    public MemberController(ObjectMapper objectMapper, MemberService memberService) {
+    @InitBinder(value = "saveNewMemberRequest")
+    public void initBinder(WebDataBinder binder) {binder.addValidators(memberValidator);}
+
+    public MemberController(ObjectMapper objectMapper, MemberService memberService, MemberValidator memberValidator) {
         super(objectMapper);
         this.memberService = memberService;
+        this.memberValidator = memberValidator;
     }
 
     @Operation(summary = "신규 회원 생성")
