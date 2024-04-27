@@ -11,6 +11,7 @@ H2 설치 및 세팅
 H2 데이터베이스의 최신 버전을 다운로드합니다.
 
 ![img.png](src/main/resources/static/images/h2.png)
+
 2. 사진과 같이 Embedded로 thecommerce 스키마를 생성하고 연결합니다.
 
 API 테스트
