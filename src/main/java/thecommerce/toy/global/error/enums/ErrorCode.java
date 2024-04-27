@@ -15,8 +15,8 @@ public enum ErrorCode {
     // === MEMBER (1000) ============================================================================================================
     ALREADY_REGISTERED_MEMBER_BY_LOGIN_ID("1001", "이미 등록된 아이디입니다."),
     NOT_EXIST_MEMBER("1002", "존재하지 않는 회원입니다."),
-    ALREADY_REGISTERED_MEMBER_BY_NICK_NAME("1105", "이미 등록된 닉네임입니다."),
-
+    ALREADY_REGISTERED_MEMBER_BY_NICK_NAME("1003", "이미 등록된 닉네임입니다."),
+    CAN_NOT_FOUND_MEMBER_DATA("1004", "요청하신 페이지에 해당하는 데이터가 없습니다."),
 
 
 

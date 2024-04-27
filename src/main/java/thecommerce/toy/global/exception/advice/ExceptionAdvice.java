@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 
 // 예외 처리
 @Order(Ordered.HIGHEST_PRECEDENCE)
-@RestControllerAdvice(basePackages = "gyun.sample")
+@RestControllerAdvice(basePackages = "thecommerce.toy")
 public class ExceptionAdvice extends RestApiControllerAdvice {
 
     // utils
@@ -29,8 +29,8 @@ public class ExceptionAdvice extends RestApiControllerAdvice {
 
     // Global Exception Catch
     @ExceptionHandler(value = GlobalException.class)
-    protected ResponseEntity<String> processCommonException(GlobalException commonException, HttpServletRequest httpServletRequest) {
-        ErrorCode errorCode = commonException.getErrorCode();
+    protected ResponseEntity<String> processCommonException(GlobalException globalException, HttpServletRequest httpServletRequest) {
+        ErrorCode errorCode = globalException.getErrorCode();
         // Event - Log
         return createFailRestResponse(errorCode.getErrorResponse());
     }
