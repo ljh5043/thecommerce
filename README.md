@@ -19,7 +19,6 @@ API 테스트
 
 2. api 사용시 BindingResult가 메소드에 포함되어 있다면 AOP를 적용한 BindingAdvice를 통해 에러를 처리하도록 구현했습니다.
 
-예외처리는 @RestControllerAdvice (ExceptionAdvice.class) 및 @ExceptionHandler를 사용하여 구현했으며
-
+3. 예외처리는 @RestControllerAdvice (ExceptionAdvice.class) 및 @ExceptionHandler를 사용하여 구현했으며
 예외처리시 @EventListener를 사용하여 로그를 남기도록 구현했습니다.
 
