@@ -1,8 +1,7 @@
 # TOY
-### 회원 기능을 담당하는 새로운 restful api 백엔드 서버 제작
+### 간단한 회원 기능을 담당하는 새로운 restful api 백엔드 서버 제작
 
 환경 : springboot, jdk1.8, spring JPA, H2
-
 
 
 H2 설치 및 세팅
