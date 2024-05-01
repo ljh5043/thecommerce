@@ -12,7 +12,7 @@ H2 데이터베이스의 최신 버전을 다운로드합니다.
 
 ![img.png](src/main/resources/static/images/h2.png)
 
-2. 사진과 같이 Embedded로 thecommerce 스키마를 생성하고 연결합니다.
+2. 사진과 같이 Embedded로 test 스키마를 생성하고 연결합니다.
 
 API 테스트
 1. http://localhost:8080/swagger-ui/index.html 에 접속하여 작성된 api를 테스트 할 수 있습니다.
