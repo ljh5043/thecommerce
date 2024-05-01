@@ -20,21 +20,20 @@ public class RestApiController {
         this.objectMapper = objectMapper;
     }
 
-    //    실패 응답
-    public ResponseEntity<String> createFailRestResponse(Object data) {
-        RestApiResponse restApiResponse = RestApiResponse.createResponse(false, data);
-        return convertToResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR, restApiResponse);
-    }
-
-    //    성공 응답
+    //    성공 응답 (200)
     public ResponseEntity<String> createRestResponse(Object data) {
         RestApiResponse restApiResponse = RestApiResponse.createResponse(true, data);
         return convertToResponseEntity(HttpStatus.OK, restApiResponse);
     }
-    //    생성 성공 응답
+    //    생성 성공 응답 (201)
     public ResponseEntity<String> createRestResponseWithCreated(Object data) {
         RestApiResponse restApiResponse = RestApiResponse.createResponse(true, data);
         return convertToResponseEntity(HttpStatus.CREATED, restApiResponse);
+    }
+    //    실패 응답 (500)
+    public ResponseEntity<String> createFailRestResponse(Object data) {
+        RestApiResponse restApiResponse = RestApiResponse.createResponse(false, data);
+        return convertToResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR, restApiResponse);
     }
 
     //    응답 생성
@@ -46,7 +45,6 @@ public class RestApiController {
         } catch (JsonProcessingException exception) {
             throw new GlobalException(ErrorCode.JSON_PROCESS_FAIL, exception);
         }
-//        return ResponseEntity.status(status).contentType(MediaType.APPLICATION_JSON).body(responseBody);
         return ResponseEntity.status(status).body(responseBody);
     }
 }

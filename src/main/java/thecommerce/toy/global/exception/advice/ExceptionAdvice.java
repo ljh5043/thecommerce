@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestControllerAdvice(basePackages = "thecommerce.toy")
 public class ExceptionAdvice extends RestApiControllerAdvice {
 
-    // utils
+    // util
     private final ErrorUtil errorUtil;
 
     public ExceptionAdvice(ObjectMapper objectMapper, ApplicationEventPublisher applicationEventPublisher, ErrorUtil errorUtil) {
